@@ -9,8 +9,12 @@
       </div>
       <b-collapse class="activity__content mt-3" id="activity-info" v-model="expanded">
         <div class="activity__props">
-          <b>Locatie: </b> {{activity.location}}<br>
-          <b>Prijs: </b> &euro;{{activity.costs}}<br>
+          <b>Locatie: </b>
+          {{activity.location}}<br>
+
+          <b>Prijs: </b>
+          <span v-if="activity.costs > 0">&euro;{{activity.costs}}</span>
+          <span v-else>Gratis</span><br>
         </div>
         <div class="activity__description mt-3">
           {{activity.description}}
