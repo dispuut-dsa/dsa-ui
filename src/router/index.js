@@ -14,6 +14,11 @@ Vue.use(VueRouter)
     path: '/over',
     name: 'Over',
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  },
+  {
+    path: '/activities',
+    name: 'Activities',
+    component: () => import(/* webpackChunkName: "activities" */ '../views/Activities.vue')
   }
 ]
 
