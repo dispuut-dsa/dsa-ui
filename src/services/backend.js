@@ -5,8 +5,8 @@ const API = axios.create({
   timeout: 5000
 })
 
-function getExample() {
-  return API.get('example/').then((result) => {
+function getActivities() {
+  return API.get('activities/').then((result) => {
     return result.data
   })
 }
@@ -18,6 +18,6 @@ function createExample(params) {
 }
 
 export default {
-  getExample,
+  getActivities,
   createExample
 }
