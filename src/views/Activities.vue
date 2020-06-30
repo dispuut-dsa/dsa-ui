@@ -3,7 +3,7 @@
     <b-container>
       <h1 class="mb-4">Activiteiten</h1>
       <div v-if="activities !== null">
-        <Activity v-for="activity in activities" :activity="activity" />
+        <Activity v-for="activity in activities" :activity="activity" :key="activity.id" />
       </div>
       <div v-else>
         Laden...
