@@ -1,6 +1,7 @@
 <template>
   <div class="new-wiki-page">
     <b-container>
+      <h1>Nieuwe wikipagina</h1>
       <div>
         <div class="form-group">
           <label for="title">Titel</label>
