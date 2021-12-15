@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Navbar />
-    <router-view class="mt-5" />
+    <router-view class="mt-5 router-view" />
   </div>
 </template>
 
@@ -12,6 +12,10 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
   color: #2c3e50;
+}
+
+.router-view {
+  margin-left: 20px;
 }
 </style>
 

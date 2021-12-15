@@ -13,16 +13,17 @@
 </template>
 
 <script>
-  import Backend from '../services/backend'
   import Activity from "../components/Activity";
+  import backend from "../services/backend";
 
   export default {
     name: 'Activities',
     components: {Activity},
     asyncComputed: {
       async activities() {
-        return await Backend.getActivities();
+        return await this.getActivities()
       }
-    }
+    },
+    mixins: [backend]
   }
 </script>
