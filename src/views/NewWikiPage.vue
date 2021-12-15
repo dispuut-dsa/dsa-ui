@@ -5,11 +5,11 @@
       <div>
         <div class="form-group">
           <label for="title">Titel</label>
-          <input class="form-control" type="text" id="title" name="title" v-model="title">
+          <input class="form-control" type="text" id="title" name="title" v-model="data.title">
         </div>
         <div class="form-group">
           <label for="content">Tekst</label>
-          <textarea class="form-control w-100" id="content" name="content" v-model="content" rows="10"></textarea>
+          <textarea class="form-control w-100" id="content" name="content" v-model="data.content" rows="10"></textarea>
         </div>
       </div>
       <button class="btn btn-primary" @click="save">
@@ -28,8 +28,11 @@
     name: 'NewWikiPage',
     data() {
       return {
-        title: '',
-        content: '',
+        data: {
+          author: null,
+          title: '',
+          content: '',
+        },
         loading: false,
         error: null
       }
@@ -39,7 +42,7 @@
         if (this.loading) return
         this.loading = true
         this.error = null
-        Backend.createWikiPage({author: null, title: this.title, content: this.content}).then((data) => {
+        Backend.createWikiPage(this.data).then((data) => {
           this.loading = false
           this.$router.push('/wiki/'+data.id)
         }).catch((error) => {
