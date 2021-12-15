@@ -15,6 +15,7 @@
         </b-col>
       </b-row>
     </b-container>
+    {{ token }}
   </div>
 </template>
 
@@ -27,11 +28,17 @@ export default {
     return {
       username: "",
       password: "",
+      token: {
+        refresh: "",
+        access: "",
+      },
     }
   },
   methods: {
     submit() {
-      this.login({username: this.username, password: this.password})
+      this.login({username: this.username, password: this.password}).then(token => {
+        this.token = token
+      })
     }
   },
   mixins: [backend]

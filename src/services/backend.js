@@ -25,7 +25,7 @@ export default {
         login(params) {
             console.log(`we gaan hier iets doen met de login params yeaaah lets go: ${params.password}, ${params.username}`)
             return this.API.post('token/', params).then((result) => {
-                return
+                return {refresh: result.data.refresh, access: result.data.access}
             })
         }
     }
