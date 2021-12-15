@@ -11,13 +11,27 @@ function getActivities() {
   })
 }
 
-function createExample(params) {
-  return API.post('example/', params).then((result) => {
+function getWikiPages() {
+  return API.get('wiki/').then((result) => {
+    return result.data
+  })
+}
+
+function getWikiPage(id) {
+  return API.get(`wiki/${id}`).then((result) => {
+    return result.data
+  })
+}
+
+function createWikiPage(params) {
+  return API.post('wiki/', params).then((result) => {
     return result.data
   })
 }
 
 export default {
   getActivities,
-  createExample
+  getWikiPages,
+  getWikiPage,
+  createWikiPage
 }

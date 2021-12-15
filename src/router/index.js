@@ -19,6 +19,21 @@ Vue.use(VueRouter)
     path: '/activities',
     name: 'Activiteiten',
     component: () => import(/* webpackChunkName: "activities" */ '../views/Activities.vue')
+  },
+  {
+    path: '/wiki',
+    name: 'Wiki',
+    component: () => import(/* webpackChunkName: "wiki" */ '../views/Wiki.vue')
+  },
+  {
+    path: '/wiki/nieuw',
+    name: 'Nieuwe wikipagina',
+    component: () => import(/* webpackChunkName: "wiki" */ '../views/NewWikiPage.vue')
+  },
+  {
+    path: '/wiki/:id',
+    name: 'Wikipagina',
+    component: () => import(/* webpackChunkName: "wiki" */ '../views/WikiPage.vue')
   }
 ]
 
