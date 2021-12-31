@@ -19,6 +19,11 @@ Vue.use(VueRouter)
     path: '/activities',
     name: 'Activiteiten',
     component: () => import(/* webpackChunkName: "activities" */ '../views/Activities.vue')
+  },
+  {
+    path: '/polls',
+    name: 'Polls',
+    component: () => import(/* webpackChunkName: "activities" */ '../views/Polls.vue')
   }
 ]
 

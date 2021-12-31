@@ -11,6 +11,12 @@ function getActivities() {
   })
 }
 
+function getPolls() {
+  return API.get('polls/').then((result) => {
+    return result.data
+  })
+}
+
 function createExample(params) {
   return API.post('example/', params).then((result) => {
     return result.data
@@ -19,5 +25,6 @@ function createExample(params) {
 
 export default {
   getActivities,
+  getPolls,
   createExample
 }
