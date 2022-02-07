@@ -11,6 +11,7 @@
             <b-nav-item to="/">Home</b-nav-item>
             <b-nav-item to="over">Over</b-nav-item>
             <b-nav-item to="activities">Activiteiten</b-nav-item>
+            <b-nav-item @click="onLogout">Logout</b-nav-item>
           </template>
           <template v-else-if="$route.path != '/login'">
             <b-nav-item to="login">Login</b-nav-item>
@@ -20,3 +21,20 @@
     </b-container>
   </b-navbar>
 </template>
+
+<script>
+import backend from "@/services/backend";
+
+export default {
+  name: 'Navbar',
+  methods: {
+    onLogout() {
+      this.logout(this.$store)
+      if (!this.$route.path === '/') {
+        this.$router.push('/')
+      }
+    }
+  },
+  mixins: [backend] // lmao
+}
+</script>

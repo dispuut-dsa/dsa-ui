@@ -34,8 +34,8 @@ export default {
     async submit() {
 
       if (!this.$store.getters.authenticated) {
-        let token = await this.login({username: this.username, password: this.password})
-        await this.$store.dispatch('set_token', token)
+        //todo: deal with errors maybe? idk
+        await this.login(this.$store,{username: this.username, password: this.password})
         this.$router.back()
       }
     }

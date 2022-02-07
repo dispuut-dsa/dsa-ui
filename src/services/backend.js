@@ -30,17 +30,17 @@ export default {
                 }
             })
         },
-
-        createExample(params) {
-            return API.post('example/', params).then((result) => {
-                return result.data
+        login(store, params) {
+            return API.post('token/', params).then((result) => {
+                let token = {refresh: result.data.refresh, access: result.data.access}
+                store.dispatch('set_token', token)
             })
         },
-
-        login(params) {
-            return API.post('token/', params).then((result) => {
-                return {refresh: result.data.refresh, access: result.data.access}
-            })
+        logout(store) {
+            store.dispatch('set_token', null)
+        },
+        refresh_token(store) {
+        //    todo implement
         }
     }
 
