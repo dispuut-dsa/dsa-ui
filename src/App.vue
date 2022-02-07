@@ -26,6 +26,10 @@ export default {
   name: 'App',
   components: {
     Navbar
+  },
+  mounted() {
+    console.log('mounted')
+    this.$store.dispatch('initialize')
   }
 }
 </script>

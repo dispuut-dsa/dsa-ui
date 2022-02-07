@@ -2,12 +2,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import backend from "@/services/backend";
 
-var Backend = Vue.extend({
-  mixins: [backend],
-})
-
-var _backend = new Backend()
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -33,19 +27,33 @@ export default new Vuex.Store({
   mutations: {
     set_token(state, new_token) {
       state.token = new_token
+      this.dispatch('save_token_to_cookie')
     },
     set_activities(state, new_activities) {
       state.activities = new_activities
     }
   },
   actions: {
+    initialize(context) {
+      this.dispatch('read_token_from_cookie')
+
+    },
     set_token(context, new_token) {
       context.commit('set_token', new_token)
     },
     get_activities(context) {
-      _backend.getActivities().then((data) => {
+      backend.methods.getActivities(this).then((data) => {
         context.commit('set_activities', data)
       })
+    },
+    save_token_to_cookie(context) {
+      let token = context.getters.token
+      // todo: implement
+    },
+    read_token_from_cookie(context) {
+      // todo: implement
+      let token = null // read from cookie
+      context.commit('set_token', token)
     }
   },
   modules: {
