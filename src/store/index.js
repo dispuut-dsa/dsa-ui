@@ -1,8 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VueCookies from 'vue-cookies'
 import backend from "@/services/backend";
 
 Vue.use(Vuex)
+Vue.use(VueCookies)
+
 
 export default new Vuex.Store({
   state: {
@@ -48,12 +51,13 @@ export default new Vuex.Store({
     },
     save_token_to_cookie(context) {
       let token = context.getters.token
-      // todo: implement
+      Vue.$cookies.set("token", token);
     },
     read_token_from_cookie(context) {
-      // todo: implement
-      let token = null // read from cookie
-      context.commit('set_token', token)
+        let token = Vue.$cookies.get("token")
+        if (token) {
+            context.commit('set_token', token)
+        }
     }
   },
   modules: {
