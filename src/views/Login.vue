@@ -15,7 +15,7 @@
         </b-col>
       </b-row>
     </b-container>
-    {{ token }}
+<!--    {{ token }}-->
   </div>
 </template>
 
@@ -28,17 +28,16 @@ export default {
     return {
       username: "",
       password: "",
-      token: {
-        refresh: "",
-        access: "",
-      },
     }
   },
   methods: {
-    submit() {
-      this.login({username: this.username, password: this.password}).then(token => {
-        this.token = token
-      })
+    async submit() {
+
+      if (!this.$store.getters.authenticated) {
+        let token = await this.login({username: this.username, password: this.password})
+        await this.$store.dispatch('set_token', token)
+        this.$router.back()
+      }
     }
   },
   mixins: [backend]

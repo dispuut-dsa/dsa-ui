@@ -14,16 +14,17 @@
 
 <script>
   import Activity from "../components/Activity";
-  import backend from "../services/backend";
 
   export default {
     name: 'Activities',
     components: {Activity},
-    asyncComputed: {
-      async activities() {
-        return await this.getActivities()
+    computed: {
+      activities() {
+        return this.$store.getters.activities
       }
     },
-    mixins: [backend]
+    mounted() {
+      this.$store.dispatch('get_activities')
+    },
   }
 </script>

@@ -6,3 +6,8 @@
     </b-container>
   </div>
 </template>
+
+<script>
+
+import backend from "../services/backend";
+</script>
