@@ -13,7 +13,7 @@
             <b-nav-item to="activities">Activiteiten</b-nav-item>
             <b-nav-item @click="onLogout">Logout</b-nav-item>
           </template>
-          <template v-else-if="$route.path != '/login'">
+          <template v-else-if="$route.path !== '/login'">
             <b-nav-item to="login">Login</b-nav-item>
           </template>
         </b-navbar-nav>
