@@ -1,7 +1,9 @@
 <template>
   <div class="activities">
     <b-container>
-      <h1 class="mb-4">Activiteiten</h1>
+      <h1 class="d-inline-block mb-4">Activiteiten</h1>
+      <router-link class="btn btn-primary float-right" to="/activities/nieuw">Nieuwe activiteit</router-link>
+
       <div v-if="activities !== null">
         <Activity v-for="activity in activities" :activity="activity" :key="activity.id" />
       </div>

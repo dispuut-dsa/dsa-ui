@@ -11,13 +11,13 @@ function getActivities() {
   })
 }
 
-function createExample(params) {
-  return API.post('example/', params).then((result) => {
+function createActivity(params) {
+  return API.post('activities/', params).then((result) => {
     return result.data
   })
 }
 
 export default {
   getActivities,
-  createExample
+  createActivity,
 }

@@ -19,6 +19,11 @@ Vue.use(VueRouter)
     path: '/activities',
     name: 'Activiteiten',
     component: () => import(/* webpackChunkName: "activities" */ '../views/Activities.vue')
+  },
+  {
+    path: '/activities/nieuw',
+    name: 'Nieuwe activiteit',
+    component: () => import(/* webpackChunkName: "activities" */ '../views/NewActivity.vue')
   }
 ]
 
