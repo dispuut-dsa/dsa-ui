@@ -72,9 +72,10 @@ export default new Vuex.Store({
     async refresh_token(context) {
       const refresh_claim = decodeJwt(context.getters.token['refresh'])
       let refresh_expiration = refresh_claim['exp']
-      if (refresh_expiration < (Date.now()/1000 - 30) ) {
+      if ((Date.now()/1000 + 30) > refresh_expiration ) {
         await backend.methods.refresh_token(this)
       } else { // our refresh token will expire within 30 seconds, so we logout.
+        console.log('expired')
         // todo: discuss whether this is okay, since it might lead to annoying loss of work when you are in the middle of editing something and you are logged out.
         backend.methods.logout(this)
       }
