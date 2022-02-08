@@ -5,14 +5,6 @@ const API = axios.create({
     timeout: 5000
 })
 export default {
-    // data() {
-    //     return {
-    //         API: axios.create({
-    //             baseURL: process.env.VUE_APP_API_URL,
-    //             timeout: 5000
-    //         }),
-    //     }
-    // },
     methods: {
         get(url, store) {
             let headers = {}
@@ -30,17 +22,28 @@ export default {
                 }
             })
         },
-        login(store, params) {
-            return API.post('token/', params).then((result) => {
-                let token = {refresh: result.data.refresh, access: result.data.access}
-                store.dispatch('set_token', token)
-            })
+        async login(store, params) {
+            let response = await API.post('token/', params)
+            let token = {refresh: response.data.refresh, access: response.data.access}
+            store.dispatch('set_token', token)
         },
         logout(store) {
             store.dispatch('set_token', null)
         },
-        refresh_token(store) {
-        //    todo implement
+        async refresh_token(store) {
+            console.log('refreshing token')
+            let params = {refresh: store.getters.token['refresh']}
+            try {
+                let response = await API.post('token/refresh/', params)
+                let token = {refresh: store.getters.token['refresh'], access: response.data.access}
+                store.dispatch('set_token', token)
+                console.log('refreshed token')
+            } catch (error) {
+                if (error.response && error.response.status === 401) { // our refresh token probably expired
+                    this.logout(store)
+                }
+            }
+
         }
     }
 

@@ -21,12 +21,8 @@ export default new Vuex.Store({
       return state.activities
     },
     authenticated: state => {
-      if (state.token) {
-        return true
-      } else {
-        return false
-      }
-    }
+      return !!state.token;
+    },
   },
   mutations: {
     set_token(state, new_token) {
@@ -35,6 +31,7 @@ export default new Vuex.Store({
       if (new_token) {
         const access_claim = decodeJwt(new_token['access'])
         // calculate delay (ms) for refreshing token, 30 secs before expiration
+        // todo: discuss whether this 30 secs is early enough, and if 5 minutes is a long enough access token lifetime
         let delay = (access_claim['exp'] - 30) * 1000 - Date.now()
         setTimeout(() => {
           this.dispatch('refresh_token')
@@ -46,9 +43,8 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    initialize(context) {
-      this.dispatch('read_token_from_cookie')
-
+    async initialize(context) {
+      await context.dispatch('read_token_from_cookie')
     },
     set_token(context, new_token) {
       context.commit('set_token', new_token)
@@ -73,8 +69,15 @@ export default new Vuex.Store({
             context.commit('set_token', token)
         }
     },
-    refresh_token(context) {
-      backend.methods.refresh_token(this)
+    async refresh_token(context) {
+      const refresh_claim = decodeJwt(context.getters.token['refresh'])
+      let refresh_expiration = refresh_claim['exp']
+      if (refresh_expiration < (Date.now()/1000 - 30) ) {
+        await backend.methods.refresh_token(this)
+      } else { // our refresh token will expire within 30 seconds, so we logout.
+        // todo: discuss whether this is okay, since it might lead to annoying loss of work when you are in the middle of editing something and you are logged out.
+        backend.methods.logout(this)
+      }
     }
   },
   modules: {

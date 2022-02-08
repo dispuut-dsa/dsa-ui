@@ -28,7 +28,6 @@ export default {
     Navbar
   },
   mounted() {
-    console.log('mounted')
     this.$store.dispatch('initialize')
   }
 }
