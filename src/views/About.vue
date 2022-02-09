@@ -8,6 +8,7 @@
 </template>
 
 <script>
-
-import backend from "../services/backend";
+  export default {
+    name: 'About'
+  }
 </script>
