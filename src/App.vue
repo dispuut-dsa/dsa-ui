@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Navbar />
-    <router-view class="mt-5" />
+    <router-view class="mt-5 router-view" />
   </div>
 </template>
 
@@ -13,6 +13,10 @@
   text-align: left;
   color: #2c3e50;
 }
+
+.router-view {
+  margin-left: 20px;
+}
 </style>
 
 <script>
@@ -22,6 +26,9 @@ export default {
   name: 'App',
   components: {
     Navbar
+  },
+  mounted() {
+    this.$store.dispatch('initialize')
   }
 }
 </script>
