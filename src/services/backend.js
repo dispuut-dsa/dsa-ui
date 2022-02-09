@@ -22,6 +22,15 @@ export default {
                 }
             })
         },
+        getPolls(store) {
+            return this.get('polls/', store).then((result) => {
+                if (result.status === 200) {
+                    return result.data
+                } else {
+                    return []
+                }
+            })
+        },
         async login(store, params) {
             let response = await API.post('token/', params)
             let token = {refresh: response.data.refresh, access: response.data.access}

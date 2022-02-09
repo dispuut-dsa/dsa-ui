@@ -11,6 +11,7 @@
             <b-nav-item to="/">Home</b-nav-item>
             <b-nav-item to="over">Over</b-nav-item>
             <b-nav-item to="activities">Activiteiten</b-nav-item>
+            <b-nav-item to="polls">Polls</b-nav-item>
             <b-nav-item @click="onLogout">Logout</b-nav-item>
           </template>
           <template v-else-if="$route.path !== '/login'">

@@ -24,6 +24,11 @@ const routes = [
         path: '/login',
         name: 'Login',
         component: () => import(/* webpackChunckName: "login" */ '../views/Login')
+    },
+    {
+        path: '/polls',
+        name: 'Polls',
+        component: () => import(/* webpackChunckName: "login" */ '../views/Polls')
     }
 ]
 

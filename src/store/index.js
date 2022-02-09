@@ -12,6 +12,7 @@ export default new Vuex.Store({
   state: {
     token: null,
     activities: null,
+    polls: null
   },
   getters: {
     token: state => {
@@ -23,6 +24,9 @@ export default new Vuex.Store({
     authenticated: state => {
       return !!state.token;
     },
+    polls: state => {
+      return state.polls;
+    }
   },
   mutations: {
     set_token(state, new_token) {
@@ -40,6 +44,9 @@ export default new Vuex.Store({
     },
     set_activities(state, new_activities) {
       state.activities = new_activities
+    },
+    set_polls(state, new_polls) {
+      state.polls = new_polls
     }
   },
   actions: {
@@ -52,6 +59,11 @@ export default new Vuex.Store({
     get_activities(context) {
       backend.methods.getActivities(this).then((data) => {
         context.commit('set_activities', data)
+      })
+    },
+    get_polls(context) {
+      backend.methods.getPolls(this).then((data) => {
+          context.commit('set_polls', data)
       })
     },
     save_token_to_cookie(context) {
