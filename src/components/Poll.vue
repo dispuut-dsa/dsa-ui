@@ -10,17 +10,18 @@
                   <b>Omschrijving: </b>
                   {{poll.description}}
                 </p>
-
-              <div class="container">
+              <div class="container" v-if="!poll.can_vote">
                 <div class="row" v-for='option in poll.options'>
                   <div class="col-12">
                     <div class="poll-option-bar" :style="{ width: 1.0 + percentages[option.id] * 0.5 + '%'}"> </div>
                     <b>{{percentages[option.id]}}%:</b> {{option.option}}
                   </div>
-                  <div class="col-8">
-
-                  </div>
                 </div>
+              </div>
+              <div class="container" v-if="poll.can_vote">
+                  <div class="row" v-for='option in poll.options'>
+                      <b-button variant="primary" to="/">{{ option.option }}</b-button>
+                  </div>
               </div>
             </b-collapse>
         </b-card>
