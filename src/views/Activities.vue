@@ -13,16 +13,18 @@
 </template>
 
 <script>
-  import Backend from '../services/backend'
   import Activity from "../components/Activity";
 
   export default {
     name: 'Activities',
     components: {Activity},
-    asyncComputed: {
-      async activities() {
-        return await Backend.getActivities();
+    computed: {
+      activities() {
+        return this.$store.getters.activities
       }
-    }
+    },
+    mounted() {
+      this.$store.dispatch('get_activities')
+    },
   }
 </script>

@@ -3,19 +3,25 @@
         <b-card class="mb-4">
 
             <div class="poll__header" aria-controls="poll-info" @click="expanded = !expanded">
-                <h3>{{poll.name}}</h3>
+                <b>{{poll.name}}</b>
             </div>
             <b-collapse class="activity__content mt-3" id="activity-info" v-model="expanded">
-                <h5>Omschrijving: </h5>
-                <p>{{poll.description}}</p>
+                <p>
+                  <b>Omschrijving: </b>
+                  {{poll.description}}
+                </p>
 
-                <h5>Stemmen: </h5>
+              <div class="container">
+                <div class="row" v-for='option in poll.options'>
+                  <div class="col-12">
+                    <div class="poll-option-bar" :style="{ width: 1.0 + percentages[option.id] * 0.5 + '%'}"> </div>
+                    <b>{{percentages[option.id]}}%:</b> {{option.option}}
+                  </div>
+                  <div class="col-8">
 
-                <ul>
-                    <li v-for='option in poll.options'>
-                        {{option.option}}: {{option.count}}
-                    </li>
-                </ul>
+                  </div>
+                </div>
+              </div>
             </b-collapse>
         </b-card>
         </div>
@@ -35,6 +41,31 @@
                 expanded: false
             }
         },
+        computed: {
+          percentages() {
+            let optionPercentages = {}
+            let total = 0;
+
+            for (let i = 0; i < this.poll.options.length; i++) {
+              total += this.poll.options[i].count;
+            }
+
+            console.log(total)
+
+            for (let i = 0; i < this.poll.options.length; i++) {
+              let option = this.poll.options[i];
+              if (total > 0) {
+                optionPercentages[option.id] = 100.0 * option.count / total;
+                console.log(optionPercentages[option.id])
+              } else {
+                optionPercentages[option.id] = 100.0/this.poll.options.length;
+              }
+            }
+            return optionPercentages;
+
+          }
+        }
+
     }
 </script>
 
@@ -43,5 +74,13 @@
         &__header {
             cursor: pointer;
         }
+    }
+
+    .poll-option-bar {
+      background: #f60101;
+      height: 0.5em;
+      border-radius: 5px;
+      display: inline-block;
+      margin-right: 2em;
     }
 </style>

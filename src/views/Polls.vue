@@ -13,17 +13,19 @@
 </template>
 
 <script>
-    import Backend from '../services/backend'
     import Poll from "../components/Poll";
 
     export default {
         name: "Polls",
         components: {Poll},
-        asyncComputed: {
-            async polls() {
-                return await Backend.getPolls();
-            }
-        }
+        computed: {
+          polls() {
+            return this.$store.getters.polls
+          }
+        },
+        mounted() {
+          this.$store.dispatch('get_polls')
+        },
     }
 </script>
 
