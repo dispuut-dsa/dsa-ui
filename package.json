@@ -12,7 +12,7 @@
     "bootstrap-vue": "^2.14.0",
     "core-js": "^3.18.3",
     "jose": "^4.5.0",
-    "moment": "^2.27.0",
+    "moment": "^2.29.2",
     "sass": "^1.47.0",
     "vue": "^2.6.11",
     "vue-async-computed": "^3.8.2",
