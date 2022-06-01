@@ -13,6 +13,13 @@ export default {
             }
             return API.get(url, {headers: headers})
         },
+        post(url, data, store) {
+            let headers = {}
+            if (store.getters.authenticated) {
+                headers['Authorization'] = `Bearer ${store.getters.token['access']}`
+            }
+            return API.post(url, data, {headers: headers})
+        },
         getActivities(store) {
             return this.get('activities/', store).then((result) => {
                 if (result.status === 200) {
@@ -21,6 +28,9 @@ export default {
                     return []
                 }
             })
+        },
+       postVoteOnPoll(store, id) {
+          return this.post("pollVote/", {option: id}, store);
         },
         getPolls(store) {
             return this.get('polls/', store).then((result) => {

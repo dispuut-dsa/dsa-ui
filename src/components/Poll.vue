@@ -20,7 +20,7 @@
               </div>
               <div class="container" v-if="poll.can_vote">
                   <div class="row" v-for='option in poll.options'>
-                      <b-button variant="primary" to="/">{{ option.option }}</b-button>
+                      <b-button class="poll-button" variant="primary" @click="() => voteOnPoll(option.id)">{{ option.option }}</b-button>
                   </div>
               </div>
             </b-collapse>
@@ -29,6 +29,8 @@
 </template>
 
 <script>
+    import backend from "../services/backend";
+
     export default {
         name: "Poll",
         props: {
@@ -42,6 +44,12 @@
                 expanded: false
             }
         },
+        methods: {
+          voteOnPoll(id) {
+            this.postVoteOnPoll(this.$store, id);
+            this.$store.dispatch("get_polls")
+          }
+        },
         computed: {
           percentages() {
             let optionPercentages = {}
@@ -50,8 +58,6 @@
             for (let i = 0; i < this.poll.options.length; i++) {
               total += this.poll.options[i].count;
             }
-
-            console.log(total)
 
             for (let i = 0; i < this.poll.options.length; i++) {
               let option = this.poll.options[i];
@@ -65,7 +71,8 @@
             return optionPercentages;
 
           }
-        }
+        },
+        mixins: [backend]
 
     }
 </script>
@@ -83,5 +90,10 @@
       border-radius: 5px;
       display: inline-block;
       margin-right: 2em;
+    }
+
+    .poll-button {
+      margin-top: 5px;
+      margin-bottom: 5px;
     }
 </style>

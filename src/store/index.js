@@ -61,6 +61,9 @@ export default new Vuex.Store({
         context.commit('set_activities', data)
       })
     },
+    vote_on_poll(context) {
+
+    },
     get_polls(context) {
       backend.methods.getPolls(this).then((data) => {
           context.commit('set_polls', data)
